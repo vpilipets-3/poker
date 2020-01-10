@@ -64,21 +64,3 @@ console.log(firstHand,secondHand);
 console.log(countPair(firstHand));
 console.log(countPair(secondHand));
 
-
-
-
-
-
-
-/*
-class card{
-    constructor(suit, value)
-    {
-        generateCard = 
-    }
-}
-
-const makeHand = function() {
-    console.log('Hand_1 is:' + )
-};
-*/
