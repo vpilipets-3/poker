@@ -42,9 +42,11 @@ const generateHand = (size, deck, chance) => {
     return hand;
   }
   else {
-    deck.forEach (hand[i] = deck.pop());
-    return hand;
+    for(let i=0; i<5; i++){
+  hand[i] = deck.pop();
   }
+  return hand;
+}
 }
 
 const countPair = hand => {
