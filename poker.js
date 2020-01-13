@@ -8,11 +8,10 @@ const getDeck = () => {
 
   for (let i = 0; i < suits.length; i++) {
     for (let j = 0; j < cards.length; j++) {
-      let card = [cards[j], suits[i]];
+      let card = { Value: cards[j], Suits: suits[i] };
       deck.push(card);
     }
   }
-
   return deck;
 }
 
@@ -30,13 +29,13 @@ const shuffle = deck => {
 const generateHand = (size, deck, chance) => {
   let hand = [size];
   const luck = (Math.random() < chance / 100);
-  if (luck) {
-    const card1 = deck[deck.length - 1];
-    deck.splice(deck.length - 1, 1);
-    const card2 = deck.find(element => element[0] === card1[0]);
 
-    hand[0] = card1;
-    hand[1] = card2;
+  if (luck) {
+
+    hand[0] = card1 = deck[deck.length - 1];
+    deck.splice(deck.length - 1, 1);
+    hand[1] = card2 = deck.find(element => element.Value === card1.Value);
+
     for (let i = 2; i < 5; i++) {
       hand[i] = deck.pop();
     }
@@ -54,10 +53,9 @@ const countPair = hand => {
   let pair = 0;
   let pairedArray = {};
   hand.forEach(inner => {
-    pairedArray[inner[0]] = 1 + (pairedArray[inner[0]] || 0);
+    pairedArray[inner.Value] = 1 + (pairedArray[inner.Value] || 0);
   });
   for (let [key, value] of Object.entries(pairedArray)) {
-    //  console.log(`${key}: ${value}`);
     pair = value > 1 && value < 4 ? pair + 1 : pair;
   }
   return pair;
@@ -68,7 +66,7 @@ shuffle(deck1);
 console.log(deck1);
 const firstHand = generateHand(5, deck1, 90);
 console.log(firstHand);
-const secondHand = generateHand(5, deck1,90);
+const secondHand = generateHand(5, deck1, 90);
 console.log(secondHand);
-console.log(countPair(firstHand),countPair(secondHand));
+console.log(countPair(firstHand), countPair(secondHand));
 
