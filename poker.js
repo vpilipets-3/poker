@@ -32,9 +32,9 @@ const generateHand = (size, deck, chance) => {
 
   if (luck) {
 
-    hand[0] = card1 = deck[deck.length - 1];
+    hand[0] = deck[deck.length - 1];
     deck.splice(deck.length - 1, 1);
-    hand[1] = card2 = deck.find(element => element.Value === card1.Value);
+    hand[1] = deck.find(element => element.Value === hand[0].Value);
 
     for (let i = 2; i < 5; i++) {
       hand[i] = deck.pop();
@@ -42,9 +42,7 @@ const generateHand = (size, deck, chance) => {
     return hand;
   }
   else {
-    for (let i = 0; i < size; i++) {
-      hand[i] = deck.pop();
-    }
+    deck.forEach (hand[i] = deck.pop());
     return hand;
   }
 }
@@ -63,7 +61,6 @@ const countPair = hand => {
 
 let deck1 = getDeck();
 shuffle(deck1);
-console.log(deck1);
 const firstHand = generateHand(5, deck1, 90);
 console.log(firstHand);
 const secondHand = generateHand(5, deck1, 90);
