@@ -27,7 +27,7 @@ const shuffle = deck => {
 }
 
 const generateHand = (size, deck, chance) => {
-  const hand = [size];
+  const hand = deck.splice(0, size);
   const luck = (Math.random() < chance / 100);
 
   if (luck) {
@@ -35,17 +35,10 @@ const generateHand = (size, deck, chance) => {
     hand[0] = deck[deck.length - 1];
     deck.splice(deck.length - 1, 1);
     hand[1] = deck.find(element => element.Value === hand[0].Value);
-    for (let i = 2; i < 5; i++) {
-      hand[i] = deck.pop();
-    }
     return hand;
   }
-  else {
-    for (let i = 0; i < 5; i++) {
-      hand[i] = deck.pop();
-    }
+  else
     return hand;
-  }
 }
 
 const countPair = hand => {
